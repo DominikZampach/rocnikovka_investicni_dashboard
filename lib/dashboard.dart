@@ -52,7 +52,15 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.all(25),
               width: MediaQuery.of(context).size.width * 0.6,
               child: Container(
-                color: Theme.of(context).colorScheme.secondary.withOpacity(.3),
+                decoration: BoxDecoration(
+                    color:
+                        Theme.of(context).colorScheme.secondary.withOpacity(.3),
+                    border: Border.all(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(.3)),
+                    borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: ListView.builder(
                     itemCount: itemCount,
                     itemBuilder: (context, index) {
@@ -72,7 +80,9 @@ class _DashboardState extends State<Dashboard> {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(20))),
                           child: ListTile(
-                            onTap: () {},
+                            onTap: () async {
+                              await listTileOnTap(index, context);
+                            },
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -98,15 +108,42 @@ class _DashboardState extends State<Dashboard> {
                     }),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(25),
-              width: MediaQuery.of(context).size.width * 0.4,
-              child: const Placeholder(
-                color: Colors.blue,
-              ),
+            Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 4 * 3,
+                  padding: const EdgeInsets.only(
+                      right: 25, left: 25, top: 25, bottom: 15),
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: const Placeholder(
+                    color: Colors.blue,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0),
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.red.shade300),
+                      ),
+                      onPressed: () {
+                        print("add stock");
+                      },
+                      child: Text(
+                        "Add stock",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.03,
+                            color: Colors.white),
+                      )),
+                )
+              ],
             )
           ],
         ));
+  }
+
+  Future<void> listTileOnTap(int index, BuildContext context) async {
+    return print(await followedStocksList[index].getLast7DaysPrice());
   }
 
   AppBar appBarDashboard(BuildContext context) {
