@@ -9,8 +9,8 @@ import 'package:rocnikovka_investicni_dashboard/func/stock.dart';
 Map<String, dynamic> defaultInput = {
   "flwCount": 2,
   "followed": [
-    {"name": "Apple", "symbol": "AAPL", "price": "350"},
-    {"name": "Google", "symbol": "GOOG", "price": "200"}
+    {"name": "Apple", "symbol": "AAPL"},
+    {"name": "Google", "symbol": "GOOG"}
   ]
 };
 
@@ -63,6 +63,5 @@ Future<List<Stock>> getAllFollowedStocks() async {
 Stock convertJsonToStock(var item) {
   String name = item["name"];
   String symbol = item["symbol"];
-  double price = double.parse(item["price"]);
-  return Stock(name, symbol, price);
+  return Stock(name, symbol);
 }

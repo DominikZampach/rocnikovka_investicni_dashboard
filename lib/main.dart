@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rocnikovka_investicni_dashboard/dashboard.dart';
+import 'package:window_manager/window_manager.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  WindowManager.instance.setResizable(false);
   runApp(const MyApp());
 }
 
