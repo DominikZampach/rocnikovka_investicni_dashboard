@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:rocnikovka_investicni_dashboard/dashboard.dart';
 import 'package:window_manager/window_manager.dart';
 
-void main() {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WindowManager.instance.setResizable(false);
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 

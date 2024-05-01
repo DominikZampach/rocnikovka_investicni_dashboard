@@ -1,8 +1,7 @@
 import 'dart:convert';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 const url = 'https://apistocks.p.rapidapi.com';
 
@@ -15,7 +14,7 @@ class Stock {
 
   Future<Map<String, double>> getLast7DaysPrice() async {
     var headers = {
-      'X-RapidAPI-Key': '22f33d4312msh9d02f01a0a61cabp1b11ebjsnb119cc325a50',
+      'X-RapidAPI-Key': dotenv.env['RAPID_API_KEY']!,
       'X-RapidAPI-Host': 'apistocks.p.rapidapi.com'
     };
 
