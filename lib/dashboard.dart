@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rocnikovka_investicni_dashboard/add_stock_page.dart';
 import 'package:rocnikovka_investicni_dashboard/func/files.dart';
 import 'package:rocnikovka_investicni_dashboard/func/stock.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -85,7 +86,8 @@ class _DashboardState extends State<Dashboard> {
                     MaterialStateProperty.all<Color>(Colors.red.shade300),
               ),
               onPressed: () {
-                print("add stock");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddStockPage()));
               },
               child: Text(
                 "Add stock",
@@ -191,7 +193,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       series: <CartesianSeries>[
         LineSeries<ChartData, String>(
-          color: Colors.black87,
+          color: Colors.grey.shade800,
           name: selectedStock.name,
           dataSource: selectedStock.getColumnData(),
           xValueMapper: (ChartData data, _) => data.date,
@@ -209,11 +211,9 @@ class _DashboardState extends State<Dashboard> {
       backgroundColor: Theme.of(context).colorScheme.secondary.withOpacity(.3),
       title: Padding(
         padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 7),
-        child: Text(
+        child: const Text(
           "Dashboard",
-          style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.05,
-              fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
         ),
       ),
     );

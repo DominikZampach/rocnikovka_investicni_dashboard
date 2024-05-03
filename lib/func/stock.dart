@@ -76,9 +76,8 @@ class Stock {
     dates.sort((a, b) => b.compareTo(a));
 
     List<String> formatedDates = [];
-    dates.forEach((element) {
-      formatedDates.add(DateFormat('yyyy-MM-dd').format(element));
-    });
+    dates.forEach((element) =>
+        formatedDates.add(DateFormat('yyyy-MM-dd').format(element)));
     formatedDates = formatedDates.reversed.toList();
     //print(formatedDates);
 
