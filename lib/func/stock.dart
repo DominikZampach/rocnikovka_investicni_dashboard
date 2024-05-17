@@ -93,6 +93,11 @@ class Stock {
   }
 }
 
+double roundStockPrice(double price) {
+  double roundedNumber = double.parse(price.toStringAsFixed(2));
+  return roundedNumber;
+}
+
 class ChartData {
   ChartData(this.date, this.price);
   final String date;

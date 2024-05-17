@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:convert';
@@ -63,4 +62,25 @@ Stock convertJsonToStock(var item) {
   String name = item["name"];
   String symbol = item["symbol"];
   return Stock(name, symbol);
+}
+
+Future<void> saveFollowedStocks(List<Stock> updatedFollowedStocks) async {
+  Directory documentsDirectory = await getApplicationDocumentsDirectory();
+  String filePath = '${documentsDirectory.path}/InvestDashboard/data.json';
+  File jsonFile = File(filePath);
+
+  Map<String, dynamic> output = {
+    "flwCount": updatedFollowedStocks.length,
+    "followed": []
+  };
+
+  for (int i = 0; i < updatedFollowedStocks.length; i++) {
+    output["followed"].add({
+      "name": updatedFollowedStocks[i].name,
+      "symbol": updatedFollowedStocks[i].symbol
+    });
+  }
+
+  String jsonString = jsonEncode(output);
+  await jsonFile.writeAsString(jsonString);
 }

@@ -78,25 +78,33 @@ class _DashboardState extends State<Dashboard> {
                         .withOpacity(.3)),
                 borderRadius: const BorderRadius.all(Radius.circular(20))),
             child: drawGraphOfStock()),
-        Padding(
-          padding: const EdgeInsets.only(top: 30.0),
-          child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.red.shade300),
-              ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddStockPage()));
-              },
-              child: Text(
-                "Add stock",
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.03,
-                    color: Colors.white),
-              )),
-        )
+        addStockButton(context)
       ],
+    );
+  }
+
+  Padding addStockButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30.0),
+      child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all<Color>(Colors.red.shade300),
+          ),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddStockPage(
+                          followedStocks: followedStocksList,
+                        )));
+          },
+          child: Text(
+            "Add stock",
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.03,
+                color: Colors.white),
+          )),
     );
   }
 
@@ -149,7 +157,7 @@ class _DashboardState extends State<Dashboard> {
                               return const CircularProgressIndicator();
                             } else {
                               return Text(
-                                "${snapshot.data} \$",
+                                "${roundStockPrice(snapshot.data!)} \$",
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.height *
